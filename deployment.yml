@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        run: fl-server-st
+        run: fl-server-st-ccl
     spec:
       containers:
         - name: server-status-informer

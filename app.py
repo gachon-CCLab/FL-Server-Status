@@ -47,52 +47,6 @@ def update_ready(FLSeReady: bool):
         FLSe.GL_Model_V += 1
     return {"Server_Status": FLSe}
 
-# @app.on_event("startup")
-# def startup():
-#     loop = asyncio.get_event_loop()
-#     loop.set_debug(True)
-
-#     loop.create_task(fl_server_check())
-
-# def async_dec(awaitable_func):
-#     async def keeping_state():
-#         global FLSe
-#         while True:
-#             try:
-#                 logging.debug(str(awaitable_func.__name__) + '함수 시작')
-#                 # print(awaitable_func.__name__, '함수 시작')
-#                 await awaitable_func()
-
-#                 logging.debug(str(awaitable_func.__name__) + '_함수 종료')
-
-#                 logging.info(f'Server_status: {FLSe}')
-#                 print()
-#             except Exception as e:
-#                 # logging.info('[E]' , awaitable_func.__name__, e)
-#                 logging.error('[E]' + str(awaitable_func.__name__) + str(e))
-#                 FLSe.FLSeReady=False
-#                 logging.info(f'[E] Server_status: {FLSe}')
-#                 print()
-#             await asyncio.sleep(3)
-
-#             return FLSe
-            
-#     return keeping_state
-
-async def fl_server_check():
-    global FLSe
-    res = requests.get('http://10.152.183.249:8080')
-    logging.info(f'fl_server_check res code: {res.status_code}')
-    if res.status_code != 200:
-        FLSe.FLSeReady=False
-        logging.info('fl-server 동작하지 않음.')
-    else:
-        FLSe.FLSeReady=True
-        logging.info('fl-server 동작함.')
-    return FLSe
-
-
-
 if __name__ == "__main__":    
 
     uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)

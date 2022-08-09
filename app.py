@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 #
 class ServerStatus(BaseModel):
 
-    S3_bucket: str = 'fl-flower-model'
+    S3_bucket: str = 'fl-gl-model'
     S3_key: str = '' # 모델 가중치 파일 이름
     play_datetime: str = ''
     FLSeReady: bool = False

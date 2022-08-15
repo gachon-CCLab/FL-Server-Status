@@ -25,6 +25,6 @@ spec:
             - containerPort: 8000
           env:
           - name: REPO_URL
-            value: "https://github.com/gachon-CCLab/Health_Server_Status.git"
+            value: "https://github.com/gachon-CCLab/FL_Server_Status.git"
           - name: GIT_TAG
-            value: "main"
+            value: "master"

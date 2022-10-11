@@ -10,8 +10,8 @@ import json
 class ServerStatus(BaseModel):
 
     S3_bucket: str = 'fl-gl-model'
-    S3_key: str = '' # 모델 가중치 파일 이름
-    play_datetime: str = ''
+    Latest_GL_Model: str = '' # 모델 가중치 파일 이름
+    Play_datetime: str = ''
     FLSeReady: bool = False
     GL_Model_V: int = 0 #모델버전 
 

@@ -2,8 +2,12 @@ from pydantic import BaseModel
 
 import uvicorn
 from fastapi import FastAPI
-import json
+import json, logging
 
+
+logging.basicConfig(level=logging.DEBUG, format="%(asctime)s [%(levelname)8.8s] %(message)s",
+                    handlers=[logging.StreamHandler()])
+logger = logging.getLogger(__name__)
 
 #버킷과 파일 이름은 여기서 결정된다. 다른 곳에서는 이 값을 받아와 사용
 #
@@ -27,7 +31,7 @@ def read_status():
     server_status_result = {"S3_bucket": FLSe.S3_bucket, "Latest_GL_Model": FLSe.Latest_GL_Model, "Play_datetime": FLSe.Play_datetime,
                             "FLSeReady": FLSe.FLSeReady, "GL_Model_V": FLSe.GL_Model_V}
     json_server_status_result = json.dumps(server_status_result)
-    print(f'server_status - {json_server_status_result}')
+    logging.info(f'server_status - {json_server_status_result}')
     # print(FLSe)
     return {"Server_Status": FLSe}
 

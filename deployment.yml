@@ -3,16 +3,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fl-server-st-ccl
+  name: fl-server-st
 spec:
   replicas: 1
   selector:
     matchLabels:
-      run: fl-server-st-ccl
+      run: fl-server-st
   template:
     metadata:
       labels:
-        run: fl-server-st-ccl
+        run: fl-server-st
     spec:
       containers:
         - name: server-status-informer

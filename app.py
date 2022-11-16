@@ -50,6 +50,14 @@ def update_ready(FLSeReady: bool):
         FLSe.GL_Model_V += 1
     return {"Server_Status": FLSe}
 
+
+@app.put("/FLSe/FLSeClosed")
+def server_closed(FLSeReady: bool):
+    global FLSe
+    print('server closed')
+    FLSe.FLSeReady = FLSeReady
+    return {"Server_Status": FLSe}
+
 if __name__ == "__main__":    
 
     uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)

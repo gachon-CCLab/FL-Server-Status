@@ -37,14 +37,14 @@ def read_status():
     return {"Server_Status": FLSe}
 
 
-@app.put("FLSe/register_client")
-def register_client(client_name: str):
+@app.put("FLSe/RegisterClient")
+def register_client(ClientName: str):
     global FLSe
-    if client_name in FLSe.client_list:
-        client_num = FLSe.client_list.index(client_name)
+    if ClientName in FLSe.client_list:
+        client_num = FLSe.client_list.index(ClientName)
     else: 
-        FLSe.client_list.append(client_name)
-        client_num = FLSe.client_list.index(client_name)
+        FLSe.client_list.append(ClientName)
+        client_num = FLSe.client_list.index(ClientName)
 
     return {'client_num':client_num}
 

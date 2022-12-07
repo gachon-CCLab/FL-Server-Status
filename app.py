@@ -9,8 +9,7 @@ logging.basicConfig(level=logging.DEBUG, format="%(asctime)s [%(levelname)8.8s] 
                     handlers=[logging.StreamHandler()])
 logger = logging.getLogger(__name__)
 
-#버킷과 파일 이름은 여기서 결정된다. 다른 곳에서는 이 값을 받아와 사용
-#
+# Server Status Object
 class ServerStatus(BaseModel):
 
     S3_bucket: str = 'fl-gl-model'
@@ -18,11 +17,15 @@ class ServerStatus(BaseModel):
     Play_datetime: str = ''
     FLSeReady: bool = False
     GL_Model_V: int = 0 #모델버전
-    client_list: list = []
 
 
+# init client_list object
+client_list= []
+
+# create App
 app = FastAPI()
 
+# create Object
 FLSe = ServerStatus()
 
 @app.get("/FLSe/info")
@@ -30,7 +33,7 @@ def read_status():
     global FLSe
 
     server_status_result = {"S3_bucket": FLSe.S3_bucket, "Latest_GL_Model": FLSe.Latest_GL_Model, "Play_datetime": FLSe.Play_datetime,
-                            "FLSeReady": FLSe.FLSeReady, "GL_Model_V": FLSe.GL_Model_V, "client_list": FLSe.client_list}
+                            "FLSeReady": FLSe.FLSeReady, "GL_Model_V": FLSe.GL_Model_V}
     json_server_status_result = json.dumps(server_status_result)
     logging.info(f'server_status - {json_server_status_result}')
     # print(FLSe)
@@ -40,11 +43,13 @@ def read_status():
 @app.put("/FLSe/RegisterClient")
 def register_client(ClientName: str):
     global FLSe
-    if ClientName in FLSe.client_list:
-        client_num = FLSe.client_list.index(ClientName)
+    if ClientName in client_list:
+        client_num = client_list.index(ClientName)
     else: 
-        FLSe.client_list.append(ClientName)
-        client_num = FLSe.client_list.index(ClientName)
+        client_list.append(ClientName)
+        client_num = client_list.index(ClientName)
+
+    logging.info(f'registered_client_list: {client_list}')
 
     return {'client_num':client_num}
 

@@ -42,12 +42,11 @@ def register_client(client_name: str):
     global FLSe
     if client_name in FLSe.client_list:
         client_num = FLSe.client_list.index(client_name)
-        return {'client_num':client_num}
     else: 
         FLSe.client_list.append(client_name)
         client_num = FLSe.client_list.index(client_name)
-        return {'client_num':client_num}
 
+    return {'client_num':client_num}
 
 
 @app.put("/FLSe/FLSeUpdate")
